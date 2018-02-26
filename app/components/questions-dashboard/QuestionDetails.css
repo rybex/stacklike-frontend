@@ -1,0 +1,24 @@
+.question-content-header, .question-content-body {
+    padding: 1em 2em;
+}
+.question-content-header {
+    border-bottom: 1px solid #ddd;
+}
+.question-content-title {
+    margin: 0.5em 0 0;
+}
+.question-content-subtitle {
+    font-size: 1em;
+    margin: 0;
+    font-weight: normal;
+}
+.question-content-subtitle span {
+    color: #999;
+}
+.question-content-controls {
+    margin-top: 2em;
+    text-align: right;
+}
+.question-content-controls .secondary-button {
+    margin-bottom: 0.3em;
+}

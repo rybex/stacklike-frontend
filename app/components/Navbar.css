@@ -5,27 +5,22 @@
     background: rgb(37, 42, 58);
     text-align: center;
 }
-
 #nav .nav-menu-button {
     display: block;
     top: 0.5em;
     right: 0.5em;
     position: absolute;
 }
-
 #nav.active {
     height: 80%;
 }
-
 .nav-inner {
     display: none;
 }
-
 #nav.active .nav-inner {
     display: block;
     padding: 2em 0;
 }
-
 #nav .pure-menu {
     background: transparent;
     border: none;
@@ -43,4 +38,12 @@
     border-bottom: none;
     font-size:110%;
     color: rgb(75, 113, 151);
+}
+.question-label-personal {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin-right: 0.5em;
+    border-radius: 3px;
+    background: #ffc94c;
 }

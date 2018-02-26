@@ -3,6 +3,8 @@ import PropTypes      from 'prop-types';
 import QuestionHeader from './QuestionHeader';
 import QuestionBody   from './QuestionBody';
 
+import './QuestionDetails.css'
+
 const QuestionDetails = ({question}) => {
   return (
     <div id='main' className='pure-u-1'>

@@ -3,6 +3,8 @@ import PropTypes    from 'prop-types';
 import QuestionItem from './QuestionItem';
 import SearchBox    from './SearchBox';
 
+import './QuestionsList.css'
+
 const QuestionsList = ({selectedQuestionId, questions, selectQuestion}) => {
   let questionsItems = questions.map( (question, index) => {
     return (

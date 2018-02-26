@@ -1,0 +1,20 @@
+.question-item {
+    padding: 0.9em 1em;
+    border-bottom: 1px solid #ddd;
+    border-left: 6px solid transparent;
+}
+.question-name,
+.question-subject {
+    margin: 0;
+}
+.question-name {
+    text-transform: uppercase;
+    color: #999;
+}
+.question-desc {
+    font-size: 80%;
+    margin: 0.4em 0;
+}
+.question-item-selected {
+    background: #eee;
+}
