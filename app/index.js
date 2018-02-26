@@ -1,5 +1,12 @@
-import React from 'react';
+import React    from 'react';
 import ReactDOM from 'react-dom';
-import App from './app/containers/App';
+import App      from './containers/App';
+import store    from './store';
 
-ReactDOM.render(<App />, document.getElementById('app'))
+import 'purecss/build/pure.css';
+import './main.css';
+
+ReactDOM.render(
+  <App store={store}/>,
+  document.getElementById('app')
+)

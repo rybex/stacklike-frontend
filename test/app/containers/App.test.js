@@ -8,9 +8,5 @@ describe('App', () => {
     const container = mount(
       <App />
     );
-
-    const paragraph = container.find('p');
-
-    expect(paragraph.text()).toBe("Hello world");
   });
 });
