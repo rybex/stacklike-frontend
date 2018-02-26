@@ -2,10 +2,12 @@ import React from 'react';
 
 const SearchBox = () => {
   return (
-    <form className='pure-form'>
-      <input type='text' className='pure-input-rounded'/>
-      <button type='submit' className='pure-button'>Search</button>
-    </form>
+    <input
+      type='text'
+      className='pure-input-rounded'
+      placeholder='Search...' 
+      style={{width: "100%", height: "40px", marginBottom: "10px"}}
+    />
   );
 };
 
