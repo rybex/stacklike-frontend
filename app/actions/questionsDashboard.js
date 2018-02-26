@@ -24,3 +24,10 @@ export function fetchQuestionsBatch() {
     ]
   };
 }
+
+export function selectQuestion(questionId) {
+  return {
+    type:       types.SELECT_QUESTION,
+    questionId: questionId
+  };
+}

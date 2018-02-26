@@ -3,12 +3,14 @@ import PropTypes    from 'prop-types';
 import QuestionItem from './QuestionItem';
 import SearchBox    from './SearchBox';
 
-const QuestionsList = ({questions}) => {
+const QuestionsList = ({selectedQuestionId, questions, selectQuestion}) => {
   let questionsItems = questions.map( (question, index) => {
     return (
       <QuestionItem
         key={index}
+        selectedQuestionId={selectedQuestionId}
         question={question}
+        onQuestionClick={selectQuestion}
       />
     );
   });
@@ -22,7 +24,9 @@ const QuestionsList = ({questions}) => {
 };
 
 QuestionsList.propTypes = {
-  questions: PropTypes.array.isRequired
+  selectedQuestionId: PropTypes.string.isRequired,
+  questions:          PropTypes.array.isRequired,
+  selectQuestion:     PropTypes.func.isRequired
 };
 
 export default QuestionsList;

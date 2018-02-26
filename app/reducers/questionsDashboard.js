@@ -11,6 +11,16 @@ const actionsMap = {
       questions:        action.questions,
       selectedQuestion: action.questions[0]
     };
+  },
+  [types.SELECT_QUESTION](state, action) {
+    var selectedQuestion = state.questions.find((question) => (
+      question.id === action.questionId
+    ));
+
+    return {
+      questions:        state.questions,
+      selectedQuestion: selectedQuestion
+    };
   }
 };
 

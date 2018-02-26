@@ -5,7 +5,8 @@ import QuestionsList      from '../components/questions-dashboard/QuestionsList'
 import LackOfQuestions    from '../components/questions-dashboard/LackOfQuestions';
 import Navbar             from '../components/Navbar';
 import {
-  fetchQuestionsBatch
+  fetchQuestionsBatch,
+  selectQuestion
 } from '../actions/questionsDashboard';
 
 class QuestionsDashboard extends Component {
@@ -33,7 +34,9 @@ class QuestionsDashboard extends Component {
       <div id='layout' className='content pure-g'>
         <Navbar/>
         <QuestionsList
+          selectedQuestionId={this.props.selectedQuestion.id}
           questions={this.props.questions}
+          selectQuestion={this.props.selectQuestion}
         />
         <QuestionDetails
           question={this.props.selectedQuestion}
@@ -61,6 +64,9 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchQuestionsBatch: () => {
       dispatch(fetchQuestionsBatch());
+    },
+    selectQuestion: (questionId) => {
+      dispatch(selectQuestion(questionId));
     }
   };
 };
