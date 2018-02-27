@@ -9,7 +9,7 @@ const actionsMap = {
   [types.FETCH_QUESTIONS_BATCH](state, action) {
     return {
       questions:        action.questions,
-      selectedQuestion: action.questions[0]
+      selectedQuestion: null
     };
   },
   [types.SELECT_QUESTION](state, action) {

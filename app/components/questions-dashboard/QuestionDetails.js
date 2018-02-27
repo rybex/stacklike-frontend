@@ -7,7 +7,7 @@ import './QuestionDetails.css'
 
 const QuestionDetails = ({question}) => {
   return (
-    <div id='main' className='pure-u-1'>
+    <div className='row'>
       <div className='question-content'>
         <QuestionHeader question={question}/>
         <QuestionBody question={question}/>

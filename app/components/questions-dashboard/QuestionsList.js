@@ -5,12 +5,11 @@ import SearchBox    from './SearchBox';
 
 import './QuestionsList.css'
 
-const QuestionsList = ({selectedQuestionId, questions, selectQuestion}) => {
+const QuestionsList = ({questions, selectQuestion}) => {
   let questionsItems = questions.map( (question, index) => {
     return (
       <QuestionItem
         key={index}
-        selectedQuestionId={selectedQuestionId}
         question={question}
         onQuestionClick={selectQuestion}
       />
@@ -18,15 +17,13 @@ const QuestionsList = ({selectedQuestionId, questions, selectQuestion}) => {
   });
 
   return (
-    <div id='list' className='pure-u-1'>
-      <SearchBox/>
+    <div className='row'>
       {questionsItems}
     </div>
   );
 };
 
 QuestionsList.propTypes = {
-  selectedQuestionId: PropTypes.string.isRequired,
   questions:          PropTypes.array.isRequired,
   selectQuestion:     PropTypes.func.isRequired
 };

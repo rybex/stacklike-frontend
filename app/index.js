@@ -1,12 +1,15 @@
-import React    from 'react';
-import ReactDOM from 'react-dom';
-import App      from './containers/App';
-import store    from './store';
+import React              from 'react';
+import ReactDOM           from 'react-dom';
+import { Provider }       from 'react-redux';
+import store              from './store';
+import QuestionsDashboard from './containers/QuestionsDashboard';
 
-import 'purecss/build/pure.css';
-import './main.css';
+import 'skeleton-css/css/skeleton.css';
+import 'skeleton-css/css/normalize.css';
 
 ReactDOM.render(
-  <App store={store}/>,
+  <Provider store={store}>
+    <QuestionsDashboard/>
+  </Provider>,
   document.getElementById('app')
 )

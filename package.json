@@ -25,12 +25,12 @@
   },
   "homepage": "https://github.com/rybex/stacklike-frontend#readme",
   "dependencies": {
-    "purecss": "^1.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "redux": "^3.7.2",
     "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "skeleton-css": "^2.0.4",
     "uuid": "^3.2.1",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1"

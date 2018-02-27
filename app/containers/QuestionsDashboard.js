@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import { connect }        from 'react-redux';
 import QuestionDetails    from '../components/questions-dashboard/QuestionDetails';
 import QuestionsList      from '../components/questions-dashboard/QuestionsList';
-import LackOfQuestions    from '../components/questions-dashboard/LackOfQuestions';
 import Navbar             from '../components/Navbar';
+import SearchBox          from '../components/questions-dashboard/SearchBox';
+import AskQuestionButton  from '../components/questions-dashboard/AskQuestionButton';
 import {
   fetchQuestionsBatch,
   selectQuestion
@@ -20,7 +21,7 @@ class QuestionsDashboard extends Component {
 
   render () {
     const result = this.props.selectedQuestion ?
-      this.renderQuestionsList() : this.renderEmptyResult();
+      this.renderEmptyResult() : this.renderQuestionsList();
 
     return (
       <div>
@@ -31,15 +32,13 @@ class QuestionsDashboard extends Component {
 
   renderQuestionsList() {
     return (
-      <div id='layout' className='content pure-g'>
+      <div className='container'>
         <Navbar/>
+        <SearchBox/>
+        <AskQuestionButton/>
         <QuestionsList
-          selectedQuestionId={this.props.selectedQuestion.id}
           questions={this.props.questions}
           selectQuestion={this.props.selectQuestion}
-        />
-        <QuestionDetails
-          question={this.props.selectedQuestion}
         />
       </div>
     )
@@ -47,9 +46,11 @@ class QuestionsDashboard extends Component {
 
   renderEmptyResult() {
     return (
-      <div id='layout' className='content pure-g'>
+      <div className='container'>
         <Navbar/>
-        <LackOfQuestions/>
+        <QuestionDetails
+          question={this.props.selectedQuestion}
+        />
       </div>
     )
   }
