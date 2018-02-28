@@ -31,3 +31,19 @@ export function selectQuestion(questionId) {
     questionId: questionId
   };
 }
+
+export function createQuestion(questionBody) {
+  const question = {
+    id: v4(),
+    creator_id: v4(),
+    creator_name: 'Foo baz',
+    title: questionBody.title,
+    body: questionBody.body,
+    created_at: '3:56pm, April 3, 2012'
+  }
+
+  return {
+    type:     types.CREATE_QUESTION,
+    question: question
+  };
+}

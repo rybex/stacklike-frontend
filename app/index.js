@@ -6,6 +6,7 @@ import QuestionsDashboard from './containers/QuestionsDashboard';
 
 import 'skeleton-css/css/skeleton.css';
 import 'skeleton-css/css/normalize.css';
+import './index.css';
 
 ReactDOM.render(
   <Provider store={store}>

@@ -22,6 +22,13 @@ const actionsMap = {
       selectedQuestion: selectedQuestion
     };
   }
+  ,
+  [types.CREATE_QUESTION](state, action) {
+    return {
+      ...state,
+      questions: [...state.questions, action.question]
+    };
+  }
 };
 
 export default function questionsDashboard(state = initialState, action) {

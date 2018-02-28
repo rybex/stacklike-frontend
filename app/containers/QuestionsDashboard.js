@@ -5,23 +5,37 @@ import QuestionsList      from '../components/questions-dashboard/QuestionsList'
 import Navbar             from '../components/Navbar';
 import SearchBox          from '../components/questions-dashboard/SearchBox';
 import AskQuestionButton  from '../components/questions-dashboard/AskQuestionButton';
+import NewQuestionForm    from '../components/questions-dashboard/NewQuestionForm';
 import {
   fetchQuestionsBatch,
-  selectQuestion
+  selectQuestion,
+  createQuestion
 } from '../actions/questionsDashboard';
 
 class QuestionsDashboard extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      newQuestionFormStatus: false
+    };
+
+    this.openCloseNewQuestionForm = this.openCloseNewQuestionForm.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchQuestionsBatch();
   }
 
+  openCloseNewQuestionForm() {
+    this.setState({
+      newQuestionFormStatus: !this.state.newQuestionFormStatus
+    })
+  }
+
   render () {
     const result = this.props.selectedQuestion ?
-      this.renderEmptyResult() : this.renderQuestionsList();
+      this.renderQuestionDetails() : this.renderQuestionsList();
 
     return (
       <div>
@@ -35,7 +49,14 @@ class QuestionsDashboard extends Component {
       <div className='container'>
         <Navbar/>
         <SearchBox/>
-        <AskQuestionButton/>
+        <AskQuestionButton
+          onClick={this.openCloseNewQuestionForm}
+          formStatus={this.state.newQuestionFormStatus}
+        />
+        <NewQuestionForm
+          status={this.state.newQuestionFormStatus}
+          onSubmit={this.props.createQuestion}
+        />
         <QuestionsList
           questions={this.props.questions}
           selectQuestion={this.props.selectQuestion}
@@ -44,7 +65,7 @@ class QuestionsDashboard extends Component {
     )
   }
 
-  renderEmptyResult() {
+  renderQuestionDetails() {
     return (
       <div className='container'>
         <Navbar/>
@@ -68,6 +89,9 @@ const mapDispatchToProps = dispatch => {
     },
     selectQuestion: (questionId) => {
       dispatch(selectQuestion(questionId));
+    },
+    createQuestion: (question) => {
+      dispatch(createQuestion(question));
     }
   };
 };

@@ -2,13 +2,16 @@ import React from 'react';
 
 import './AskQuestionButton.css'
 
-const AskQuestionButton = () => {
+const AskQuestionButton = ({onClick, formStatus}) => {
+  const value = formStatus ? 'Cancel' : 'Ask question';
+
   return (
     <div className='row'>
       <input
         className='button-primary ask-question'
         type='button'
-        value='Ask question'/>
+        value={value}
+        onClick={onClick}/>
     </div>
   );
 };
