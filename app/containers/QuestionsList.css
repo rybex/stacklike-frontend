@@ -1,3 +1,9 @@
+.invisible {
+  display: none
+}
+.ask-question {
+  float: right;
+}
 .question-item {
     padding: 0.9em 1em;
     border-bottom: 1px solid #ddd;

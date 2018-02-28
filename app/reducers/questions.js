@@ -1,30 +1,37 @@
 import * as types from '../constants/actionTypes';
+import { v4 }     from 'uuid';
 
 const initialState = {
-  questions:        [],
-  selectedQuestion: null
+  questions:        [
+    {
+      id: v4(),
+      creator_id: v4(),
+      creator_name: 'Tomasz Rybczyński',
+      title: 'Test title',
+      body: 'test body',
+      created_at: '3:56pm, April 3, 2012',
+      answers: []
+    },
+    {
+      id: v4(),
+      creator_id: v4(),
+      creator_name: 'Foo baz',
+      title: 'Test title 2',
+      body: 'test body 2',
+      created_at: '3:56pm, April 3, 2012',
+      answers: []
+    }
+  ]
 };
 
 const actionsMap = {
   [types.FETCH_QUESTIONS_BATCH](state, action) {
     return {
-      questions:        action.questions,
-      selectedQuestion: null
-    };
-  },
-  [types.SELECT_QUESTION](state, action) {
-    const selectedQuestion = state.questions.find((question) => (
-      question.id === action.questionId
-    ));
-
-    return {
-      questions:        state.questions,
-      selectedQuestion: selectedQuestion
+      questions: state.questions
     };
   },
   [types.CREATE_QUESTION](state, action) {
     return {
-      ...state,
       questions: [...state.questions, action.question]
     };
   },
@@ -37,10 +44,7 @@ const actionsMap = {
       return question;
     });
 
-    const answers = state.selectedQuestion.answers.concat(action.answer)
-
     return {
-      selectedQuestion: { ...state.selectedQuestion, answers: answers },
       questions: updatedQuestions
     };
   }

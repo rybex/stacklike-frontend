@@ -1,6 +1,5 @@
-import React from 'react';
-
-import './AskQuestionButton.css'
+import React     from 'react';
+import PropTypes from 'prop-types';
 
 const AskQuestionButton = ({onClick, formStatus}) => {
   const value = formStatus ? 'Cancel' : 'Ask question';
@@ -14,6 +13,11 @@ const AskQuestionButton = ({onClick, formStatus}) => {
         onClick={onClick}/>
     </div>
   );
+};
+
+AskQuestionButton.propTypes = {
+  onClick:    PropTypes.func.isRequired,
+  formStatus: PropTypes.bool.isRequired
 };
 
 export default AskQuestionButton;

@@ -1,6 +1,5 @@
-import React from 'react';
-
-import './NewQuestionForm.css';
+import React     from 'react';
+import PropTypes from 'prop-types';
 
 const NewQuestionForm = ({status, onSubmit}) => {
   const visibility = status ? '' : 'invisible';
@@ -23,6 +22,11 @@ const NewQuestionForm = ({status, onSubmit}) => {
       </form>
     </div>
   );
+};
+
+NewQuestionForm.propTypes = {
+  status:   PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired
 };
 
 export default NewQuestionForm;

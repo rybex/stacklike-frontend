@@ -1,4 +1,5 @@
-import React from 'react';
+import React     from 'react';
+import PropTypes from 'prop-types';
 
 const SubmitAnswerForm = ({questionId, status, onSubmit}) => {
   const visibility = status ? '' : 'invisible';
@@ -20,6 +21,12 @@ const SubmitAnswerForm = ({questionId, status, onSubmit}) => {
       </form>
     </div>
   );
+};
+
+SubmitAnswerForm.propTypes = {
+  questionId: PropTypes.string.isRequired,
+  status:     PropTypes.bool.isRequired,
+  onSubmit:   PropTypes.func.isRequired,
 };
 
 export default SubmitAnswerForm;

@@ -4,9 +4,7 @@ import QuestionHeader from './QuestionHeader';
 import QuestionBody   from './QuestionBody';
 import Answer         from './Answer';
 
-import './QuestionDetails.css'
-
-const QuestionDetails = ({question, onAnswerClick}) => {
+const Question = ({question, onAnswerClick}) => {
   const answers = question.answers.map((answer, index) => {
     return (
       <Answer
@@ -27,8 +25,9 @@ const QuestionDetails = ({question, onAnswerClick}) => {
   );
 };
 
-QuestionDetails.propTypes = {
-  question: PropTypes.object.isRequired
+Question.propTypes = {
+  question:      PropTypes.object.isRequired,
+  onAnswerClick: PropTypes.func.isRequired
 };
 
-export default QuestionDetails;
+export default Question;
