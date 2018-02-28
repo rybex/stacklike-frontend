@@ -13,7 +13,7 @@ const actionsMap = {
     };
   },
   [types.SELECT_QUESTION](state, action) {
-    var selectedQuestion = state.questions.find((question) => (
+    const selectedQuestion = state.questions.find((question) => (
       question.id === action.questionId
     ));
 
@@ -21,12 +21,27 @@ const actionsMap = {
       questions:        state.questions,
       selectedQuestion: selectedQuestion
     };
-  }
-  ,
+  },
   [types.CREATE_QUESTION](state, action) {
     return {
       ...state,
       questions: [...state.questions, action.question]
+    };
+  },
+  [types.CREATE_ANSWER](state, action) {
+    const updatedQuestions = state.questions.map((question) => {
+      if(question.id === action.answer.question_id){
+        const answers = question.answers.concat(action.answer)
+        return { ...question, answers: answers }
+      }
+      return question;
+    });
+
+    const answers = state.selectedQuestion.answers.concat(action.answer)
+
+    return {
+      selectedQuestion: { ...state.selectedQuestion, answers: answers },
+      questions: updatedQuestions
     };
   }
 };

@@ -1,7 +1,7 @@
 import React     from 'react';
 import PropTypes from 'prop-types';
 
-const QuestionHeader = ({question}) => {
+const QuestionHeader = ({question, onClick}) => {
   return (
     <div className='question-content-header'>
       <div>
@@ -12,7 +12,7 @@ const QuestionHeader = ({question}) => {
       </div>
 
       <div className='question-content-controls'>
-        <button className='secondary-button'>Answer</button>
+        <button className='secondary-button' onClick={onClick}>Answer</button>
       </div>
     </div>
   );

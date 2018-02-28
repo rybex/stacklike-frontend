@@ -6,10 +6,12 @@ import Navbar             from '../components/Navbar';
 import SearchBox          from '../components/questions-dashboard/SearchBox';
 import AskQuestionButton  from '../components/questions-dashboard/AskQuestionButton';
 import NewQuestionForm    from '../components/questions-dashboard/NewQuestionForm';
+import SubmitAnswerForm    from '../components/questions-dashboard/SubmitAnswerForm';
 import {
   fetchQuestionsBatch,
   selectQuestion,
-  createQuestion
+  createQuestion,
+  createAnswer
 } from '../actions/questionsDashboard';
 
 class QuestionsDashboard extends Component {
@@ -17,10 +19,12 @@ class QuestionsDashboard extends Component {
     super(props);
 
     this.state = {
-      newQuestionFormStatus: false
+      newQuestionFormStatus: false,
+      newAnswerFormStatus: false
     };
 
     this.openCloseNewQuestionForm = this.openCloseNewQuestionForm.bind(this);
+    this.openCloseNewAnswerForm   = this.openCloseNewAnswerForm.bind(this);
   }
 
   componentWillMount() {
@@ -30,6 +34,12 @@ class QuestionsDashboard extends Component {
   openCloseNewQuestionForm() {
     this.setState({
       newQuestionFormStatus: !this.state.newQuestionFormStatus
+    })
+  }
+
+  openCloseNewAnswerForm() {
+    this.setState({
+      newAnswerFormStatus: !this.state.newAnswerFormStatus
     })
   }
 
@@ -71,6 +81,12 @@ class QuestionsDashboard extends Component {
         <Navbar/>
         <QuestionDetails
           question={this.props.selectedQuestion}
+          onAnswerClick={this.openCloseNewAnswerForm}
+        />
+        <SubmitAnswerForm
+          questionId={this.props.selectedQuestion.id}
+          status={this.state.newAnswerFormStatus}
+          onSubmit={this.props.createAnswer}
         />
       </div>
     )
@@ -92,6 +108,9 @@ const mapDispatchToProps = dispatch => {
     },
     createQuestion: (question) => {
       dispatch(createQuestion(question));
+    },
+    createAnswer: (answer) => {
+      dispatch(createAnswer(answer));
     }
   };
 };

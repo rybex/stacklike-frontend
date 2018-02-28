@@ -11,7 +11,8 @@ export function fetchQuestionsBatch() {
         creator_name: 'Tomasz Rybczyński',
         title: 'Test title',
         body: 'test body',
-        created_at: '3:56pm, April 3, 2012'
+        created_at: '3:56pm, April 3, 2012',
+        answers: []
       },
       {
         id: v4(),
@@ -19,7 +20,8 @@ export function fetchQuestionsBatch() {
         creator_name: 'Foo baz',
         title: 'Test title 2',
         body: 'test body 2',
-        created_at: '3:56pm, April 3, 2012'
+        created_at: '3:56pm, April 3, 2012',
+        answers: []
       }
     ]
   };
@@ -45,5 +47,21 @@ export function createQuestion(questionBody) {
   return {
     type:     types.CREATE_QUESTION,
     question: question
+  };
+}
+
+export function createAnswer(answerBody) {
+  const answer = {
+    id: v4(),
+    question_id: answerBody.questionId,
+    creator_id: v4(),
+    creator_name: 'Foo baz',
+    body: answerBody.body,
+    created_at: '3:56pm, April 3, 2012'
+  }
+
+  return {
+    type:   types.CREATE_ANSWER,
+    answer: answer
   };
 }
