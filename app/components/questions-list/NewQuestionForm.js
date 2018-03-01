@@ -16,9 +16,24 @@ const NewQuestionForm = ({status, onSubmit}) => {
   return (
     <div className={'row ' + visibility}>
       <form onSubmit={handleSubmit}>
-        <input id='title' className='u-full-width' type='text' placeholder='Question title' required/>
-        <textarea id='body' className='u-full-width' placeholder='Question body' required/>
-        <input className='button-primary' type='submit' value='Submit'/>
+        <input
+          id='title'
+          className='u-full-width question-title'
+          type='text'
+          placeholder='Question title'
+          required
+        />
+        <textarea
+          id='body'
+          className='u-full-width question-body'
+          placeholder='Question body'
+          required
+        />
+        <input
+          className='button-primary'
+          type='submit'
+          value='Submit'
+        />
       </form>
     </div>
   );

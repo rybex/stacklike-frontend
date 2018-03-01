@@ -24,3 +24,7 @@
 .question-item-selected {
     background: #eee;
 }
+.question-title,
+.question-body {
+  margin-bottom: 5px
+}
