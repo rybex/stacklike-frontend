@@ -1,9 +1,7 @@
 import React     from 'react';
 import PropTypes from 'prop-types';
 
-const SubmitAnswerForm = ({questionId, status, onSubmit}) => {
-  const visibility = status ? '' : 'invisible';
-
+const SubmitAnswerForm = ({questionId, onSubmit}) => {
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -14,7 +12,7 @@ const SubmitAnswerForm = ({questionId, status, onSubmit}) => {
   };
 
   return (
-    <div className={'row ' + visibility}>
+    <div className='row'>
       <form onSubmit={handleSubmit}>
         <textarea id='body' className='u-full-width' placeholder='Answer...' required/>
         <input className='button-primary' type='submit' value='Submit'/>
@@ -25,7 +23,6 @@ const SubmitAnswerForm = ({questionId, status, onSubmit}) => {
 
 SubmitAnswerForm.propTypes = {
   questionId: PropTypes.string.isRequired,
-  status:     PropTypes.bool.isRequired,
   onSubmit:   PropTypes.func.isRequired,
 };
 

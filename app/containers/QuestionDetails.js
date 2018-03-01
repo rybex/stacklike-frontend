@@ -19,6 +19,7 @@ class QuestionDetails extends Component {
     };
 
     this.openCloseNewAnswerForm = this.openCloseNewAnswerForm.bind(this);
+    this.submitNewAnswer        = this.submitNewAnswer.bind(this);
   }
 
   openCloseNewAnswerForm() {
@@ -27,10 +28,28 @@ class QuestionDetails extends Component {
     })
   }
 
+  submitNewAnswer(answer) {
+    this.setState({
+      newAnswerFormStatus: !this.state.newAnswerFormStatus
+    });
+
+    this.props.createAnswer(answer);
+  }
+
   render () {
     const selectedQuestion = this.props.questions.find((question) => (
       question.id === this.props.match.params.id
     ));
+
+    var newAnswerForm = null;
+
+    if(this.state.newAnswerFormStatus) {
+      newAnswerForm = <SubmitAnswerForm
+        questionId={this.props.match.params.id}
+        status={this.state.newAnswerFormStatus}
+        onSubmit={this.submitNewAnswer}
+      />;
+    }
 
     return (
       <div className='container'>
@@ -39,11 +58,7 @@ class QuestionDetails extends Component {
           question={selectedQuestion}
           onAnswerClick={this.openCloseNewAnswerForm}
         />
-        <SubmitAnswerForm
-          questionId={this.props.match.params.id}
-          status={this.state.newAnswerFormStatus}
-          onSubmit={this.props.createAnswer}
-        />
+        {newAnswerForm}
       </div>
     )
   }
