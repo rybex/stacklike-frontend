@@ -1,8 +1,7 @@
 import React          from 'react';
 import PropTypes      from 'prop-types';
-import QuestionHeader from './QuestionHeader';
-import QuestionBody   from './QuestionBody';
 import Answer         from './Answer';
+import ReactMarkdown  from 'react-markdown';
 
 const Question = ({question, onAnswerClick}) => {
   const answers = question.answers.map((answer, index) => {
@@ -17,8 +16,23 @@ const Question = ({question, onAnswerClick}) => {
   return (
     <div className='row'>
       <div className='question-content'>
-        <QuestionHeader question={question} onClick={onAnswerClick}/>
-        <QuestionBody question={question}/>
+        <div className='question-content-header'>
+          <h1 className='question-content-title'>{question.title}</h1>
+          <p className='question-content-subtitle'>
+            From <a>{question.creator_name}</a> at <span>{question.created_at}</span>
+          </p>
+        </div>
+        <div className='question-content-body'>
+          <ReactMarkdown
+            source={question.body}
+          />
+        </div>
+        <div className='question-content-controls'>
+          <button
+            className='secondary-button'
+            onClick={onAnswerClick}>Answer
+          </button>
+        </div>
         {answers}
       </div>
     </div>
