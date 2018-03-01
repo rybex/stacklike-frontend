@@ -22,6 +22,7 @@ class QuestionsList extends Component {
     };
 
     this.openCloseNewQuestionForm = this.openCloseNewQuestionForm.bind(this);
+    this.submitNewQuestion        = this.submitNewQuestion.bind(this);
     this.props.fetchQuestionsBatch()
   }
 
@@ -29,6 +30,14 @@ class QuestionsList extends Component {
     this.setState({
       newQuestionFormStatus: !this.state.newQuestionFormStatus
     })
+  }
+
+  submitNewQuestion(question) {
+    this.setState({
+      newQuestionFormStatus: !this.state.newQuestionFormStatus
+    });
+
+    this.props.createQuestion(question);
   }
 
   render () {
@@ -41,6 +50,14 @@ class QuestionsList extends Component {
       );
     });
 
+    var newQuestionForm = null;
+
+    if(this.state.newQuestionFormStatus) {
+      newQuestionForm = <NewQuestionForm
+        onSubmit={this.submitNewQuestion}
+      />;
+    }
+
     return (
       <div className='container'>
         <Navbar/>
@@ -49,10 +66,7 @@ class QuestionsList extends Component {
           onClick={this.openCloseNewQuestionForm}
           formStatus={this.state.newQuestionFormStatus}
         />
-        <NewQuestionForm
-          status={this.state.newQuestionFormStatus}
-          onSubmit={this.props.createQuestion}
-        />
+        {newQuestionForm}
         {questionsItems}
       </div>
     )

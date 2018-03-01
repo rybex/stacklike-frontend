@@ -1,9 +1,7 @@
 import React     from 'react';
 import PropTypes from 'prop-types';
 
-const NewQuestionForm = ({status, onSubmit}) => {
-  const visibility = status ? '' : 'invisible';
-
+const NewQuestionForm = ({onSubmit}) => {
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -14,7 +12,7 @@ const NewQuestionForm = ({status, onSubmit}) => {
   };
 
   return (
-    <div className={'row ' + visibility}>
+    <div className='row'>
       <form onSubmit={handleSubmit}>
         <input
           id='title'
@@ -40,7 +38,6 @@ const NewQuestionForm = ({status, onSubmit}) => {
 };
 
 NewQuestionForm.propTypes = {
-  status:   PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired
 };
 
