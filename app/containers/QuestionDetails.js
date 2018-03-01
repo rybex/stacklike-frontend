@@ -46,7 +46,6 @@ class QuestionDetails extends Component {
     if(this.state.newAnswerFormStatus) {
       newAnswerForm = <SubmitAnswerForm
         questionId={this.props.match.params.id}
-        status={this.state.newAnswerFormStatus}
         onSubmit={this.submitNewAnswer}
       />;
     }
@@ -57,6 +56,7 @@ class QuestionDetails extends Component {
         <Question
           question={selectedQuestion}
           onAnswerClick={this.openCloseNewAnswerForm}
+          formStatus={this.state.newAnswerFormStatus}
         />
         {newAnswerForm}
       </div>

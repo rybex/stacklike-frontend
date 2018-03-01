@@ -23,7 +23,7 @@ const SubmitAnswerForm = ({questionId, onSubmit}) => {
 
 SubmitAnswerForm.propTypes = {
   questionId: PropTypes.string.isRequired,
-  onSubmit:   PropTypes.func.isRequired,
+  onSubmit:   PropTypes.func.isRequired
 };
 
 export default SubmitAnswerForm;
