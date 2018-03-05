@@ -22,6 +22,13 @@ module.exports = {
 			}
 		]
 	},
+	plugins: [
+		new webpack.DefinePlugin({
+			'process.env': {
+        'API_URL': JSON.stringify('http://localhost:3000')
+      }
+		}),
+	],
 	devServer: {
   	contentBase: parentDir,
   	historyApiFallback: true

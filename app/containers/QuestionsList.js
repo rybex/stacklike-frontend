@@ -81,7 +81,7 @@ class QuestionsList extends Component {
 
 const mapStateToProps = (state) => ({
   questions: state.questions,
-  user: state.users
+  user:      state.users
 });
 
 const mapDispatchToProps = dispatch => {

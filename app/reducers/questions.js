@@ -1,30 +1,9 @@
 import * as types from '../constants/actionTypes';
 import { v4 }     from 'uuid';
 
-const initialState = [
-  {
-    id: v4(),
-    creator_id: v4(),
-    creator_name: 'Tomasz Rybczyński',
-    title: 'Test title',
-    body: 'test body',
-    created_at: '3:56pm, April 3, 2012',
-    answers: []
-  },
-  {
-    id: v4(),
-    creator_id: v4(),
-    creator_name: 'Foo baz',
-    title: 'Test title 2',
-    body: 'test body 2',
-    created_at: '3:56pm, April 3, 2012',
-    answers: []
-  }
-];
-
 const actionsMap = {
   [types.FETCH_QUESTIONS_BATCH](state, action) {
-    return state;
+    return action.questions;
   },
   [types.CREATE_QUESTION](state, action) {
     return [...state, action.question];
@@ -42,7 +21,7 @@ const actionsMap = {
   }
 };
 
-export default function questions(state = initialState, action) {
+export default function questions(state = [], action) {
   const reduceFn = actionsMap[action.type];
   if (!reduceFn) return state;
   return reduceFn(state, action);
