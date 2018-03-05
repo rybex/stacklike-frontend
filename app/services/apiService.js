@@ -4,6 +4,10 @@ export function callSearch() {
   return get('/searches');
 }
 
+export function callSessionMe() {
+  return get('/me');
+}
+
 export function callCreateQuestion(questionPayload) {
   const command_name = 'AskQuestion'
   const payload = {
