@@ -1,10 +1,24 @@
 .ask-question {
   float: right;
 }
-.question-item {
+.question-item, .answer-item {
+    position: relative;
+    overflow: hidden;
     padding: 0.9em 1em;
-    border-bottom: 1px solid #ddd;
-    border-left: 6px solid transparent;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+}
+.question-item-section, .answer-item-section {
+  position: relative;
+  float: left;
+  padding-left: 10px;
+}
+.question-item:hover
+{
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+  cursor: pointer;
 }
 .question-name,
 .question-subject {

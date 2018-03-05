@@ -9,8 +9,10 @@ const QuestionItem = ({question, history}) => {
 
   return (
     <div className='question-item' onClick={handleOnClick}>
-      <div>
-        <h5 className='question-name'>{question.creator_name}</h5>
+      <div className='question-item-section'>
+        <img className='avatar' src={question.creator_image} />
+      </div>
+      <div className='question-item-section'>
         <h4 className='question-subject'>{question.title}</h4>
         <p className='question-desc'>
           {question.body}

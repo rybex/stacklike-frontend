@@ -36,8 +36,8 @@ const Question = ({question, onAnswerClick, formStatus}) => {
             {buttonText}
           </button>
         </div>
-        {answers}
       </div>
+      {answers}
     </div>
   );
 };
