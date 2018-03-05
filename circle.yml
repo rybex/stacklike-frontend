@@ -1,0 +1,15 @@
+machine:
+  environment:
+    NODE_ENV: test
+  node:
+    version: 9.5.0
+
+test:
+  override:
+    - npm run test
+
+deployment:
+  production:
+    branch: master
+    heroku:
+      appname: stacklike-frontend
