@@ -1,11 +1,28 @@
 import React          from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes      from 'prop-types';
 
-import './Navbar.css'
+import './Navbar.css';
 
-const Navbar = ({history}) => {
+const Navbar = ({user, history}) => {
+  var userItem = null;
   const handleOnClick = () => {
     history.push('/');
+  }
+
+  if(user) {
+    userItem = (
+      <li className='navbar-item' style={{float: 'right'}}>
+        <img className='avatar' src={user.image} />
+        <a className='navbar-link' href="http://localhost:3000/signout?redirect_url=http://localhost:8080">Logout</a>
+      </li>
+    )
+  } else {
+    userItem = (
+      <li className='navbar-item' style={{float: 'right'}}>
+        <a className='navbar-link' href='http://localhost:3000/auth/google_oauth2?redirect_url=http://localhost:8080'>Login</a>
+      </li>
+    )
   }
 
   return (
@@ -14,9 +31,14 @@ const Navbar = ({history}) => {
         <li className='navbar-item'>
           <a className='navbar-link' href='#' onClick={handleOnClick}>Stacklike questions</a>
         </li>
+        {userItem}
       </ul>
     </nav>
   );
+};
+
+Navbar.propTypes = {
+  user: PropTypes.object,
 };
 
 export default withRouter(Navbar);

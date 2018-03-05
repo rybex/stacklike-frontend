@@ -10,6 +10,9 @@ import {
   fetchQuestionsBatch,
   createQuestion
 } from '../actions/questions';
+import {
+  fetchUser
+} from '../actions/users';
 
 import './QuestionsList.css';
 
@@ -23,7 +26,8 @@ class QuestionsList extends Component {
 
     this.openCloseNewQuestionForm = this.openCloseNewQuestionForm.bind(this);
     this.submitNewQuestion        = this.submitNewQuestion.bind(this);
-    this.props.fetchQuestionsBatch()
+    this.props.fetchQuestionsBatch();
+    this.props.fetchUser();
   }
 
   openCloseNewQuestionForm() {
@@ -60,7 +64,9 @@ class QuestionsList extends Component {
 
     return (
       <div className='container'>
-        <Navbar/>
+        <Navbar
+          user={this.props.user}
+        />
         <SearchBox/>
         <AskQuestionButton
           onClick={this.openCloseNewQuestionForm}
@@ -74,7 +80,8 @@ class QuestionsList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  questions: state.questions
+  questions: state.questions,
+  user: state.users
 });
 
 const mapDispatchToProps = dispatch => {
@@ -84,6 +91,9 @@ const mapDispatchToProps = dispatch => {
     },
     createQuestion: (question) => {
       dispatch(createQuestion(question));
+    },
+    fetchUser: () => {
+      dispatch(fetchUser());
     }
   };
 };

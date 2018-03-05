@@ -52,7 +52,9 @@ class QuestionDetails extends Component {
 
     return (
       <div className='container'>
-        <Navbar/>
+        <Navbar
+          user={this.props.user}
+        />
         <Question
           question={selectedQuestion}
           onAnswerClick={this.openCloseNewAnswerForm}
@@ -65,7 +67,8 @@ class QuestionDetails extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  questions: state.questions
+  questions: state.questions,
+  user:      state.users
 });
 
 const mapDispatchToProps = dispatch => {
