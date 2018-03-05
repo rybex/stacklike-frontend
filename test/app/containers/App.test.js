@@ -4,7 +4,7 @@ import { mount }    from 'enzyme';
 
 describe('App', () => {
   it('should render all components', () => {
-    const container = mount(
-    );
+    // const container = mount(
+    // );
   });
 });
