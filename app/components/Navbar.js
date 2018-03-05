@@ -14,13 +14,13 @@ const Navbar = ({user, history}) => {
     userItem = (
       <li className='navbar-item' style={{float: 'right'}}>
         <img className='avatar' src={user.image} />
-        <a className='navbar-link' href="http://localhost:3000/signout?redirect_url=http://localhost:8080">Logout</a>
+        <a className='navbar-link' href={`${process.env.API_URL}/signout?redirect_url=${process.env.REDIRECT_URL}`}>Logout</a>
       </li>
     )
   } else {
     userItem = (
       <li className='navbar-item' style={{float: 'right'}}>
-        <a className='navbar-link' href='http://localhost:3000/auth/google_oauth2?redirect_url=http://localhost:8080'>Login</a>
+        <a className='navbar-link' href={`${process.env.API_URL}/auth/google_oauth2?redirect_url=${process.env.REDIRECT_URL}`}>Login</a>
       </li>
     )
   }
