@@ -1,5 +1,6 @@
 # Stacklike frontend
 
+[![CircleCI](https://circleci.com/gh/rybex/stacklike-frontend/tree/master.svg?style=svg)](https://circleci.com/gh/rybex/stacklike-frontend/tree/master)
 ## Development
 
 Install the `npm` packages described in the `package.json`:
