@@ -4,8 +4,10 @@
   "description": "Frontend application used for asking stacklike questions",
   "main": "index.js",
   "scripts": {
+    "build": "./node_modules/.bin/webpack --config ./webpack/webpack.prod.config.js",
     "test": "jest",
-    "dev": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack.dev.config.js"
+    "dev": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack.dev.config.js",
+    "start": "npm run build && NODE_ENV=production node server.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,7 @@
   },
   "homepage": "https://github.com/rybex/stacklike-frontend#readme",
   "dependencies": {
+    "express": "^4.16.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-markdown": "^3.2.2",
