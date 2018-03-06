@@ -10,7 +10,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/*', function(request, response) {
-  response.redirect(request.baseUrl);
+  response.redirect('/');
 });
 
 app.listen(PORT, error => (
