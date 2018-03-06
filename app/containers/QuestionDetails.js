@@ -5,6 +5,7 @@ import Navbar             from '../components/Navbar';
 import Question           from '../components/question-details/Question';
 import SubmitAnswerForm   from '../components/question-details/SubmitAnswerForm';
 import {
+  fetchQuestionsBatch,
   createAnswer
 } from '../actions/questions';
 
@@ -20,6 +21,12 @@ class QuestionDetails extends Component {
 
     this.openCloseNewAnswerForm = this.openCloseNewAnswerForm.bind(this);
     this.submitNewAnswer        = this.submitNewAnswer.bind(this);
+  }
+
+  componentWillMount() {
+    if(this.props.questions.length == 0) {
+      this.props.fetchQuestionsBatch();
+    }
   }
 
   openCloseNewAnswerForm() {
@@ -41,26 +48,20 @@ class QuestionDetails extends Component {
       question.id === this.props.match.params.id
     ));
 
-    var newAnswerForm = null;
-
-    if(this.state.newAnswerFormStatus) {
-      newAnswerForm = <SubmitAnswerForm
-        questionId={this.props.match.params.id}
-        onSubmit={this.submitNewAnswer}
-      />;
-    }
-
     return (
       <div className='container'>
         <Navbar
           user={this.props.user}
         />
-        <Question
+       { selectedQuestion ? <Question
           question={selectedQuestion}
           onAnswerClick={this.openCloseNewAnswerForm}
           formStatus={this.state.newAnswerFormStatus}
-        />
-        {newAnswerForm}
+        /> : null }
+        {this.state.newAnswerFormStatus ? <SubmitAnswerForm
+          questionId={this.props.match.params.id}
+          onSubmit={this.submitNewAnswer}
+        /> : null }
       </div>
     )
   }
@@ -73,6 +74,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
+    fetchQuestionsBatch: () => {
+      dispatch(fetchQuestionsBatch());
+    },
     createAnswer: (answer) => {
       dispatch(createAnswer(answer));
     }

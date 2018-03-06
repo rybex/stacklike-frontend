@@ -54,12 +54,19 @@ class QuestionsList extends Component {
       );
     });
 
-    var newQuestionForm = null;
+    var newQuestionForm, askButton = null;
 
     if(this.state.newQuestionFormStatus) {
       newQuestionForm = <NewQuestionForm
         onSubmit={this.submitNewQuestion}
       />;
+    }
+
+    if(this.props.user) {
+      askButton = <AskQuestionButton
+        onClick={this.openCloseNewQuestionForm}
+        formStatus={this.state.newQuestionFormStatus}
+      />
     }
 
     return (
@@ -68,10 +75,7 @@ class QuestionsList extends Component {
           user={this.props.user}
         />
         <SearchBox/>
-        <AskQuestionButton
-          onClick={this.openCloseNewQuestionForm}
-          formStatus={this.state.newQuestionFormStatus}
-        />
+        {askButton}
         {newQuestionForm}
         {questionsItems}
       </div>
