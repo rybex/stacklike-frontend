@@ -7,6 +7,8 @@ const QuestionItem = ({question, history}) => {
     history.push('/' + question.id);
   }
 
+  const body = question.body.length > 20 ? `${question.body.substring(0,20)}...` : question.body;
+
   return (
     <div className='question-item' onClick={handleOnClick}>
       <div className='question-item-section' style={{float: 'right'}}>
@@ -15,7 +17,7 @@ const QuestionItem = ({question, history}) => {
       <div className='question-item-section'>
         <h4 className='question-subject'>{question.title}</h4>
         <p className='question-desc'>
-          {question.body}
+          {body}
         </p>
       </div>
     </div>

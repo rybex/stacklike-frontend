@@ -54,7 +54,6 @@ class QuestionsList extends Component {
   }
 
   handleWaypointEnter() {
-    console.log(this.props.cursor)
     if(this.props.cursor) {
       this.props.fetchQuestionsBatch(this.props.cursor, this.props.searchText);
     }
@@ -70,21 +69,6 @@ class QuestionsList extends Component {
       );
     });
 
-    var newQuestionForm, askButton = null;
-
-    if(this.state.newQuestionFormStatus) {
-      newQuestionForm = <NewQuestionForm
-        onSubmit={this.submitNewQuestion}
-      />;
-    }
-
-    if(this.props.user) {
-      askButton = <AskQuestionButton
-        onClick={this.openCloseNewQuestionForm}
-        formStatus={this.state.newQuestionFormStatus}
-      />
-    }
-
     return (
       <div className='container' style={{marginBottom: '200px'}}>
         <Navbar
@@ -93,8 +77,13 @@ class QuestionsList extends Component {
         <SearchBox
           onKeyPress={this.onSearch}
         />
-        {askButton}
-        {newQuestionForm}
+        {this.props.user ? <AskQuestionButton
+          onClick={this.openCloseNewQuestionForm}
+          formStatus={this.state.newQuestionFormStatus}
+        /> : null}
+        {this.state.newQuestionFormStatus ? <NewQuestionForm
+          onSubmit={this.submitNewQuestion}
+        /> : null}
         {questionsItems}
         <Waypoint
           onEnter={this.handleWaypointEnter}

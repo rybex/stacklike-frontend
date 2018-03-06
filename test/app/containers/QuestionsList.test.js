@@ -16,7 +16,7 @@ describe('QuestionsList', () => {
   const initialState = {
     questions: {
       list:       questionsResponse,
-      cursor:     1,
+      cursor:     0,
       searchText: null
     },
     users: meResponse
