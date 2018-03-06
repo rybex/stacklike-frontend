@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 const Answer = ({answer}) => {
   return (
     <div className='answer-item'>
-      <div className='answer-item-section'>
+      <div className='answer-item-section' style={{float: 'right'}}>
         <img className='avatar' src={answer.creator_image} />
       </div>
       <div className='answer-item-section'>

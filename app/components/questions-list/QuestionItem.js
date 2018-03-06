@@ -9,7 +9,7 @@ const QuestionItem = ({question, history}) => {
 
   return (
     <div className='question-item' onClick={handleOnClick}>
-      <div className='question-item-section'>
+      <div className='question-item-section' style={{float: 'right'}}>
         <img className='avatar' src={question.creator_image} />
       </div>
       <div className='question-item-section'>
