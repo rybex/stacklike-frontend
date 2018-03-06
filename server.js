@@ -9,6 +9,10 @@ app.get('/', function(request, response) {
   response.sendFile(__dirname + '/app/index.html');
 });
 
+app.get('/*', function(request, response) {
+  response.redirect(request.baseUrl);
+});
+
 app.listen(PORT, error => (
   error
     ? console.error(error)
