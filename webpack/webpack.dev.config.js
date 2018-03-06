@@ -11,10 +11,8 @@ config.devServer = {
 
 config.plugins.push(
 	new webpack.DefinePlugin({
-		'process.env': {
-			'API_URL': JSON.stringify('http://localhost:3000'),
-      'REDIRECT_URL': JSON.stringify('http://localhost:8080')
-		}
+		'API_URL': JSON.stringify('http://localhost:3000'),
+		'REDIRECT_URL': JSON.stringify('http://localhost:8080')
 	}),
 );
 

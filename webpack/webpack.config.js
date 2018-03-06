@@ -3,6 +3,7 @@ var path    = require('path');
 
 module.exports = {
 	entry: [
+		'babel-polyfill',
 		path.join(__dirname, '../app/index.js')
 	],
   output: {

@@ -1,5 +1,3 @@
-const URL = process.env.API_URL;
-
 export function callSearch() {
   return get('/searches');
 }
@@ -28,8 +26,8 @@ export function callCreateAnswer(answerPayload) {
   return post(command_name, payload)
 }
 
-function get(endpoint) {
-  return fetch(URL + endpoint, {
+async function get(endpoint) {
+  return await fetch(API_URL + endpoint, {
     method: 'GET',
     headers: {
      'Accept':       'application/json',
@@ -40,8 +38,8 @@ function get(endpoint) {
   .then( response => Promise.all([response, response.json()]));
 }
 
-function post(commandName, payload) {
-  return fetch(URL + '/commands', {
+async function post(commandName, payload) {
+  return await fetch(API_URL + '/commands', {
     method: 'POST',
     headers: {
      'Accept':       'application/json',
