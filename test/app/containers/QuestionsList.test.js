@@ -1,39 +1,18 @@
-import React            from 'react';
-import { Provider }     from 'react-redux';
-import { mount }        from 'enzyme';
-import thunk            from 'redux-thunk';
-import fetchMock        from 'fetch-mock';
-import configureStore   from 'redux-mock-store';
-import { MemoryRouter } from 'react-router';
-import QuestionsList    from '../../../app/containers/QuestionsList';
+import React             from 'react';
+import { Provider }      from 'react-redux';
+import { mount }         from 'enzyme';
+import thunk             from 'redux-thunk';
+import fetchMock         from 'fetch-mock';
+import configureStore    from 'redux-mock-store';
+import { MemoryRouter }  from 'react-router';
+import QuestionsList     from '../../../app/containers/QuestionsList';
+import questionsResponse from "../../fixtures/questions";
+import meResponse        from "../../fixtures/me";
 
 describe('QuestionsList', () => {
   let store, container;
   const middlewares       = [thunk]
   const mockStore         = configureStore(middlewares);
-  const questionsResponse = [{
-    body:          "Test body",
-    created_at:    "2018-03-05 16:16:11 UTC",
-    creator_id:    "59db7cc2-c6f0-4c62-a40f-15d96b658670",
-    creator_image: "https://photo.jpg",
-    creator_name:  "Tomek Rybczyński",
-    cursor:        1,
-    id:            "19ed1035-9c79-4f2c-8831-c3aefcc685b7",
-    title:         "zxcxczxczx",
-    answers: [{
-      body:           "zxcxzcx",
-      creator_id:     "59db7cc2-c6f0-4c62-a40f-15d96b658670",
-      creator_image:  "https://photo.jpg",
-      creator_name:   "Foo Bar",
-      id:             "6b057780-7ff4-414c-9c7c-8132b443da12",
-      question_id:    "19ed1035-9c79-4f2c-8831-c3aefcc685b7"
-    }]
-  }]
-  const meResponse = {
-    email: "tomek.rybka@gmail.com",
-    image: "https://photo.jpg",
-    name:  "Tomek Rybczyński"
-  }
   const initialState = {
     questions: {
       list:       questionsResponse,
