@@ -46,6 +46,7 @@
     "babel-jest": "^22.4.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
@@ -53,10 +54,13 @@
     "css-loader": "^0.28.9",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "fetch-mock": "^6.0.1",
     "jest": "^22.4.0",
     "jest-cli": "^22.4.0",
     "less": "^3.0.1",
     "less-loader": "^4.0.5",
+    "react-addons-test-utils": "^15.6.2",
+    "redux-mock-store": "^1.5.1",
     "style-loader": "^0.20.2"
   },
   "babel": {
@@ -79,6 +83,13 @@
     "setupFiles": [
       "<rootDir>/test/shim.js",
       "<rootDir>/test/enzyme_setup.js"
-    ]
+    ],
+    "moduleNameMapper": {
+      "^.*[.](css|CSS)$": "<rootDir>/test/styleMock.js"
+    },
+    "globals": {
+      "API_URL": "http://stacklike.com",
+      "REDIRECT_URL": "http://stacklike-frontend.com"
+    }
   }
 }
