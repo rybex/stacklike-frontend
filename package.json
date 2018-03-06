@@ -28,11 +28,13 @@
   "homepage": "https://github.com/rybex/stacklike-frontend#readme",
   "dependencies": {
     "express": "^4.16.2",
+    "moment": "^2.21.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-markdown": "^3.2.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
+    "react-waypoint": "^8.0.1",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "skeleton-css": "^2.0.4",
