@@ -3,7 +3,7 @@ import PropTypes      from 'prop-types';
 import Answer         from './Answer';
 import ReactMarkdown  from 'react-markdown';
 
-const Question = ({question, onAnswerClick, formStatus}) => {
+const Question = ({question, onAnswerClick, formStatus, user}) => {
   const buttonText = formStatus ? 'Cancel' : 'Answer';
 
   const answers = question.answers.map((answer, index) => {
@@ -30,11 +30,13 @@ const Question = ({question, onAnswerClick, formStatus}) => {
           />
         </div>
         <div className='question-content-controls'>
-          <button
-            className='secondary-button'
-            onClick={onAnswerClick}>
-            {buttonText}
-          </button>
+          {
+            user ? <button
+              className='secondary-button'
+              onClick={onAnswerClick}>
+              {buttonText}
+            </button> : null
+          }
         </div>
       </div>
       {answers}
@@ -45,7 +47,8 @@ const Question = ({question, onAnswerClick, formStatus}) => {
 Question.propTypes = {
   question:      PropTypes.object.isRequired,
   onAnswerClick: PropTypes.func.isRequired,
-  formStatus:    PropTypes.bool.isRequired
+  formStatus:    PropTypes.bool.isRequired,
+  user:          PropTypes.object
 };
 
 export default Question;

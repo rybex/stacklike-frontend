@@ -17,6 +17,7 @@ describe('QuestionsList', () => {
     creator_id:    "59db7cc2-c6f0-4c62-a40f-15d96b658670",
     creator_image: "https://photo.jpg",
     creator_name:  "Tomek Rybczyński",
+    cursor:        1,
     id:            "19ed1035-9c79-4f2c-8831-c3aefcc685b7",
     title:         "zxcxczxczx",
     answers: [{
@@ -33,10 +34,18 @@ describe('QuestionsList', () => {
     image: "https://photo.jpg",
     name:  "Tomek Rybczyński"
   }
+  const initialState = {
+    questions: {
+      list:       questionsResponse,
+      cursor:     1,
+      searchText: null
+    },
+    users: meResponse
+  }
 
   describe('Empy list of questions and user', () => {
     beforeEach(()=>{
-        store = mockStore({questions: [], users: null})
+        store = mockStore({questions: {list: [], cursor: 0, searchText: null}, users: null})
         fetchMock.getOnce('http://stacklike.com/searches', { body: [], headers: { 'content-type': 'application/json' } })
         fetchMock.getOnce('http://stacklike.com/me', { body: null, headers: { 'content-type': 'application/json' } })
 
@@ -90,7 +99,7 @@ describe('QuestionsList', () => {
 
   describe('With list of questions and user provided', () => {
     beforeEach(()=>{
-        store = mockStore({questions: questionsResponse, users: meResponse})
+        store = mockStore(initialState)
         fetchMock.getOnce('http://stacklike.com/searches', { body: [], headers: { 'content-type': 'application/json' } })
         fetchMock.getOnce('http://stacklike.com/me', { body: null, headers: { 'content-type': 'application/json' } })
 

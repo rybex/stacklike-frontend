@@ -1,5 +1,13 @@
-export function callSearch() {
-  return get('/searches');
+export function callSearch(searchText) {
+  return get(`/searches?text=${searchText}`);
+}
+
+export function callFetchBatch(cursor, searchText) {
+  return get(`/searches?cursor=${cursor}${searchText ? `&text=${searchText}`: ''}`);
+}
+
+export function callFetchQuestions() {
+  return get(`/searches`);
 }
 
 export function callSessionMe() {

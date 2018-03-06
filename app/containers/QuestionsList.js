@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import { connect }        from 'react-redux';
-import { withRouter }     from 'react-router-dom'
+import Waypoint           from 'react-waypoint';
 import Navbar             from '../components/Navbar';
 import SearchBox          from '../components/questions-list/SearchBox';
 import QuestionItem       from '../components/questions-list/QuestionItem';
 import AskQuestionButton  from '../components/questions-list/AskQuestionButton';
 import NewQuestionForm    from '../components/questions-list/NewQuestionForm';
 import {
+  fetchQuestions,
   fetchQuestionsBatch,
+  applySearch,
   createQuestion
 } from '../actions/questions';
 import {
@@ -26,7 +28,9 @@ class QuestionsList extends Component {
 
     this.openCloseNewQuestionForm = this.openCloseNewQuestionForm.bind(this);
     this.submitNewQuestion        = this.submitNewQuestion.bind(this);
-    this.props.fetchQuestionsBatch();
+    this.handleWaypointEnter      = this.handleWaypointEnter.bind(this);
+    this.onSearch                 = this.onSearch.bind(this);
+    this.props.fetchQuestions();
     this.props.fetchUser();
   }
 
@@ -42,6 +46,18 @@ class QuestionsList extends Component {
     });
 
     this.props.createQuestion(question);
+  }
+
+  onSearch(text) {
+    const searchText = text === '' ? null : text;
+    searchText ? this.props.applySearch(searchText) : this.props.fetchQuestions();
+  }
+
+  handleWaypointEnter() {
+    console.log(this.props.cursor)
+    if(this.props.cursor) {
+      this.props.fetchQuestionsBatch(this.props.cursor, this.props.searchText);
+    }
   }
 
   render () {
@@ -70,28 +86,42 @@ class QuestionsList extends Component {
     }
 
     return (
-      <div className='container'>
+      <div className='container' style={{marginBottom: '200px'}}>
         <Navbar
           user={this.props.user}
         />
-        <SearchBox/>
+        <SearchBox
+          onKeyPress={this.onSearch}
+        />
         {askButton}
         {newQuestionForm}
         {questionsItems}
+        <Waypoint
+          onEnter={this.handleWaypointEnter}
+          bottomOffset={100}
+        />
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  questions: state.questions,
-  user:      state.users
+  questions:  state.questions.list,
+  searchText: state.questions.searchText,
+  cursor:     state.questions.cursor,
+  user:       state.users
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchQuestionsBatch: () => {
-      dispatch(fetchQuestionsBatch());
+    fetchQuestions: () => {
+      dispatch(fetchQuestions());
+    },
+    fetchQuestionsBatch: (cursor, text) => {
+      dispatch(fetchQuestionsBatch(cursor, text));
+    },
+    applySearch: (searchText) => {
+      dispatch(applySearch(searchText));
     },
     createQuestion: (question) => {
       dispatch(createQuestion(question));
@@ -102,4 +132,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(QuestionsList))
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionsList);

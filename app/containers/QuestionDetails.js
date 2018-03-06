@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import { connect }        from 'react-redux';
-import { withRouter }     from 'react-router-dom'
 import Navbar             from '../components/Navbar';
 import Question           from '../components/question-details/Question';
 import SubmitAnswerForm   from '../components/question-details/SubmitAnswerForm';
 import {
-  fetchQuestionsBatch,
   createAnswer
 } from '../actions/questions';
 
@@ -25,7 +23,7 @@ class QuestionDetails extends Component {
 
   componentWillMount() {
     if(this.props.questions.length == 0) {
-      this.props.fetchQuestionsBatch();
+      this.props.history.push('/');
     }
   }
 
@@ -57,6 +55,7 @@ class QuestionDetails extends Component {
           question={selectedQuestion}
           onAnswerClick={this.openCloseNewAnswerForm}
           formStatus={this.state.newAnswerFormStatus}
+          user={this.props.user}
         /> : null }
         {this.state.newAnswerFormStatus ? <SubmitAnswerForm
           questionId={this.props.match.params.id}
@@ -68,19 +67,16 @@ class QuestionDetails extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  questions: state.questions,
+  questions: state.questions.list,
   user:      state.users
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchQuestionsBatch: () => {
-      dispatch(fetchQuestionsBatch());
-    },
     createAnswer: (answer) => {
       dispatch(createAnswer(answer));
     }
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(QuestionDetails))
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionDetails);

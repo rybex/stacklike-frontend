@@ -1,29 +1,51 @@
 import * as types from '../constants/actionTypes';
+import moment     from 'moment';
 import { v4 }     from 'uuid';
 import {
   callSearch,
+  callFetchBatch,
   callCreateQuestion,
+  callFetchQuestions,
   callCreateAnswer
 } from '../services/apiService';
 
-export function fetchQuestionsBatch() {
+export function fetchQuestions() {
+  return (dispatch, getState) => {
+    return callFetchQuestions().then(([response, json]) =>{
+      const cursor = calculateCursor(json);
+      dispatch(fetchQuestionsSuccess(types.FETCH_QUESTIONS, json, null, cursor));
+    })
+  };
+}
+
+export function fetchQuestionsBatch(cursor, searchText = null) {
+  return (dispatch, getState) => {
+    return callFetchBatch(cursor, searchText).then(([response, json]) =>{
+      const cursor = calculateCursor(json);
+      dispatch(fetchQuestionsSuccess(types.FETCH_QUESTIONS_BATCH, json, searchText, cursor));
+    })
+  };
+}
+
+export function applySearch(searchText) {
   return dispatch => {
-    return callSearch().then(([response, json]) =>{
-      dispatch(fetchQuestionsSuccess(json));
+    return callSearch(searchText).then(([response, json]) =>{
+      const cursor = calculateCursor(json);
+      dispatch(fetchQuestionsSuccess(types.APPLY_SEARCH, json, searchText, cursor));
     })
   };
 }
 
 export function createQuestion(questionBody) {
   return (dispatch, getState) => {
-    const user     = getState().users;
-    const question = {
+    const user      = getState().users;
+    const question  = {
       id:            v4(),
       creator_name:  user.name,
       creator_image: user.image,
       title:         questionBody.title,
       body:          questionBody.body,
-      created_at:    '3:56pm, April 3, 2012',
+      created_at:    moment().format("YYYY-MM-DD"),
       answers:       []
     }
 
@@ -42,7 +64,7 @@ export function createAnswer(answerBody) {
       creator_name:  user.name,
       creator_image: user.image,
       body:          answerBody.body,
-      created_at:   '3:56pm, April 3, 2012'
+      created_at:    moment().format("YYYY-MM-DD")
     }
 
     return callCreateAnswer(answer).then(([response, json]) =>{
@@ -51,14 +73,16 @@ export function createAnswer(answerBody) {
   };
 }
 
-function fetchQuestionsSuccess(questions) {
+function fetchQuestionsSuccess(type, questions, searchText, cursor) {
   return {
-    type: types.FETCH_QUESTIONS_BATCH,
-    questions: questions
+    type:       type,
+    questions:  questions,
+    searchText: searchText,
+    cursor:     cursor
   };
 }
 
-function createQuestionSuccess(question) {
+function createQuestionSuccess(question, cursor) {
   return {
     type:     types.CREATE_QUESTION,
     question: question
@@ -70,4 +94,9 @@ function createAnswerSuccess(answer) {
     type:   types.CREATE_ANSWER,
     answer: answer
   };
+}
+
+function calculateCursor(questions) {
+  const question  = questions.slice(-1)[0];
+  return question ? question.cursor : null;
 }
