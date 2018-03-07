@@ -11,6 +11,7 @@ import {
 
 export function fetchQuestions() {
   return (dispatch, getState) => {
+    dispatch(requestQuestions());
     return callFetchQuestions().then(([response, json]) =>{
       const cursor = calculateCursor(json);
       dispatch(fetchQuestionsSuccess(types.FETCH_QUESTIONS, json, null, cursor));
@@ -29,6 +30,7 @@ export function fetchQuestionsBatch(cursor, searchText = null) {
 
 export function applySearch(searchText) {
   return dispatch => {
+    dispatch(requestQuestions());
     return callSearch(searchText).then(([response, json]) =>{
       const cursor = calculateCursor(json);
       dispatch(fetchQuestionsSuccess(types.APPLY_SEARCH, json, searchText, cursor));
@@ -70,6 +72,12 @@ export function createAnswer(answerBody) {
     return callCreateAnswer(answer).then(([response, json]) =>{
       dispatch(createAnswerSuccess(answer))
     })
+  };
+}
+
+function requestQuestions() {
+  return {
+    type: types.REQUESTED_QUESTIONS
   };
 }
 

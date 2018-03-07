@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect }        from 'react-redux';
 import Waypoint           from 'react-waypoint';
+import Spinner            from 'react-spinkit';
 import Navbar             from '../components/Navbar';
 import SearchBox          from '../components/questions-list/SearchBox';
 import QuestionItem       from '../components/questions-list/QuestionItem';
@@ -23,7 +24,7 @@ class QuestionsList extends Component {
     super(props);
 
     this.state = {
-      newQuestionFormStatus: false,
+      newQuestionFormStatus: false
     };
 
     this.openCloseNewQuestionForm = this.openCloseNewQuestionForm.bind(this);
@@ -77,13 +78,21 @@ class QuestionsList extends Component {
         <SearchBox
           onKeyPress={this.onSearch}
         />
-        {this.props.user ? <AskQuestionButton
-          onClick={this.openCloseNewQuestionForm}
-          formStatus={this.state.newQuestionFormStatus}
-        /> : null}
-        {this.state.newQuestionFormStatus ? <NewQuestionForm
-          onSubmit={this.submitNewQuestion}
-        /> : null}
+        {this.props.user ?
+          <AskQuestionButton
+            onClick={this.openCloseNewQuestionForm}
+            formStatus={this.state.newQuestionFormStatus}
+          /> : null}
+        {this.props.isLoading ?
+          <Spinner
+            className='spinner'
+            name='ball-scale-multiple'
+            color='#999'
+          /> : null}
+        {this.state.newQuestionFormStatus ?
+          <NewQuestionForm
+            onSubmit={this.submitNewQuestion}
+          /> : null}
         {questionsItems}
         <Waypoint
           onEnter={this.handleWaypointEnter}
@@ -98,6 +107,7 @@ const mapStateToProps = (state) => ({
   questions:  state.questions.list,
   searchText: state.questions.searchText,
   cursor:     state.questions.cursor,
+  isLoading:  state.questions.isLoading,
   user:       state.users
 });
 

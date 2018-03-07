@@ -4,7 +4,8 @@ import { v4 }     from 'uuid';
 const initialState = {
   list:       [],
   cursor:     0,
-  searchText: null
+  searchText: null,
+  isLoading:  false
 }
 
 const actionsMap = {
@@ -12,21 +13,30 @@ const actionsMap = {
     return {
       list:       action.questions,
       cursor:     action.cursor,
-      searchText: action.searchText
+      searchText: action.searchText,
+      isLoading:  false
     };
   },
   [types.FETCH_QUESTIONS_BATCH](state, action) {
     return {
       list:       state.list.concat(action.questions),
       cursor:     action.cursor || state.cursor,
-      searchText: action.searchText
+      searchText: action.searchText,
+      isLoading:  false
     };
   },
   [types.APPLY_SEARCH](state, action) {
     return {
       list:       action.questions,
       cursor:     action.cursor,
-      searchText: action.searchText
+      searchText: action.searchText,
+      isLoading:  false
+    };
+  },
+  [types.REQUESTED_QUESTIONS](state, action) {
+    return {
+      ...state,
+      isLoading: true
     };
   },
   [types.CREATE_QUESTION](state, action) {
