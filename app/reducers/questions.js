@@ -42,7 +42,7 @@ const actionsMap = {
   [types.CREATE_QUESTION](state, action) {
     return {
       list:       state.list.concat(action.question),
-      cursor:     state.cursor,
+      cursor:     state.cursor + 1,
       searchText: state.searchText
     };
   },
